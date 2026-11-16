@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --font-hand: "Schoolbell", "Comic Sans MS", cursive;
+  --font-spartan: "League Spartan", system-ui, sans-serif;
+  --font-poppins: "Poppins", system-ui, sans-serif;
+  --font-emoji: "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", sans-serif;
+
+  --color-ink: #1d1d1d;
+  --color-cream: #fbf6e6;
+  --color-home: #4381a0;
+  --color-sidebar: #afcdd5;
+  --color-mint: #edfbe0;
+  --color-sun: #ecc263;
+  --color-path: #fbf3e6;
+  --color-path-edge: #85b2ba;
+  --color-tile: #cbd3dd;
+  --color-leaf: #2f6b3a;
+  --color-sage: #6e9189;
+  --color-sky: #afced6;
+  --color-ink-blue: #4a64c8;
+  --color-chalk: #2b2724;
+  --color-wood: #d9915a;
+  --color-loader: #87a07a;
+
+  --animate-pop: pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-fade: fade 0.35s ease-out both;
+  --animate-rise: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4%); }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6%) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-6deg); }
+    75% { transform: rotate(6deg); }
+  }
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #e9e7ee;
+  font-family: var(--font-spartan);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- Tablet device frame ---------- */
+.device {
+  --screen-w: min(calc((100vw - 3rem) / 1.13), calc((100vh - 3rem) / 0.735));
+  position: relative;
+  padding: calc(var(--screen-w) * 0.055) calc(var(--screen-w) * 0.065);
+  background: #1b1b1b;
+  border-radius: calc(var(--screen-w) * 0.05);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45);
+}
+
+.device-screen {
+  width: var(--screen-w);
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  container-type: size;
+  background: #fff;
+}
+
+.device-camera {
+  position: absolute;
+  left: calc(var(--screen-w) * 0.022);
+  top: 50%;
+  width: calc(var(--screen-w) * 0.032);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: #fff;
+  transform: translateY(-50%);
+}
+
+.device-button {
+  position: absolute;
+  right: calc(var(--screen-w) * 0.025);
+  top: 50%;
+  width: calc(var(--screen-w) * 0.014);
+  height: 20%;
+  border-radius: 9999px;
+  background: #fff;
+  transform: translateY(-50%);
+}
+
+/* Small screens: drop the bezel and fill the viewport */
+@media (max-width: 820px), (max-height: 520px) {
+  .device {
+    --screen-w: min(100vw, 100vh * 1.6);
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .device-camera,
+  .device-button {
+    display: none;
+  }
+}
+
+.rotate-hint {
+  display: none;
+}
+@media (orientation: portrait) and (max-width: 820px) {
+  .rotate-hint {
+    display: flex;
+  }
+}
+
+.emoji {
+  font-family: var(--font-emoji);
+  line-height: 1;
+}
+
+/* White handwritten label with a dark outline (Learn page) */
+.label-outline {
+  color: #fff;
+  text-shadow:
+    -0.12cqw -0.12cqw 0 #1d3b1f, 0.12cqw -0.12cqw 0 #1d3b1f,
+    -0.12cqw 0.12cqw 0 #1d3b1f, 0.12cqw 0.12cqw 0 #1d3b1f,
+    0 0.3cqw 0.6cqw rgba(0, 0, 0, 0.35);
+}
+
+.chalk-text {
+  color: #f4f1ea;
+  text-shadow: 0 0 0.25cqw rgba(255, 255, 255, 0.35);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0.8cqw;
+}
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 9999px;
+}
+
+.food-shadow {
+  filter: drop-shadow(0 0.4cqw 0.4cqw rgba(0, 0, 0, 0.18));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
